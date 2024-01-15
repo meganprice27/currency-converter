@@ -1,10 +1,13 @@
 import { Container, Typography, Grid } from '@mui/material';
-import "./index.css"
+import { useState } from 'react';
 import InputAmount from './components/InputAmount';
 import SelectCountry from './components/SelectCountry'
 import SwitchCurrency from './components/SwitchCurrency';
 
 function App() {
+  const [fromCurrency, setFromCurrency] = useState("");
+  const [toCurrency, setToCurrency] = useState("");
+
   const boxStyles = {
     background: "#fdfdfd",
     marginTop: "3rem",
@@ -22,9 +25,9 @@ function App() {
     <Typography variant='h5' sx={{ marginBottom: "2rem"}}>Currency Converter</Typography>
     <Grid container spacing={2}>
       <InputAmount />
-      <SelectCountry />
+      <SelectCountry value={fromCurrency} setValue={setFromCurrency} label="From"/>
       <SwitchCurrency />
-      <SelectCountry />
+      <SelectCountry value={toCurrency} setValue={setToCurrency} label="To"/>
     </Grid>
     </Container>
   )
