@@ -1,16 +1,22 @@
+import React from 'react';
 import './App.css';
-import CurrencyRow from './CurrencyRow';
+import InputAmount from './components/InputAmount';
+import SelectCountry from './components/SelectCountry'
+import { Container, Typography, Grid } from '@mui/material';
+import SwitchCurrency from './components/SwitchCurrency';
 
 function App() {
   return (
-    <div>
-      <h1>Convert currency</h1>
-    <CurrencyRow  />
-    <div className="equals">=</div>
-    <CurrencyRow />
-    </div>
-    
-  );
+    <Container maxWidth="md" sx={{ background: '#fdfdfd'}}>
+    <Typography variant='h5' sx={{ marginTop: "2rem"}}>click</Typography>
+    <Grid container spacing={2}>
+      <InputAmount />
+      <SelectCountry />
+      <SwitchCurrency />
+      <SelectCountry />
+    </Grid>
+    </Container>
+  )
 }
 
 export default App;
