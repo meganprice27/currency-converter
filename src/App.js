@@ -30,7 +30,7 @@ useEffect(() => {
     .then(response => setResultCurrency(response.data.data[codeToCurrency]))
     .catch(error => console.log(error))
   }
-}, [firstAmount, fromCurrency, toCurrency])
+}, [firstAmount, fromCurrency, toCurrency, codeFromCurrency, codeToCurrency])
 
   const boxStyles = {
     background: "#fdfdfd",
