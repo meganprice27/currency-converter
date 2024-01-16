@@ -48,7 +48,7 @@ useEffect(() => {
 
   return (
     <Container maxWidth="md" sx={boxStyles}>
-    <Typography variant='h5' sx={{ marginBottom: "2rem"}}>Currency Converter</Typography>
+    <Typography variant='h4' sx={{ marginBottom: "2rem", fontWeight: "bold"}}>Currency Converter</Typography>
     <Grid container spacing={2}>
       <InputAmount />
       <SelectCountry value={fromCurrency} setValue={setFromCurrency} label="From"/>
