@@ -15,7 +15,9 @@ function App() {
     firstAmount
   } = useContext(CurrencyContext);
   const [resultCurrency, setResultCurrency] = useState(0);
-  const codeFromCurrency = fromCurrency.split(" ")[1];
+  const calculatedResultCurrency = resultCurrency*firstAmount;
+  const roundedResultCurrency = calculatedResultCurrency.toFixed(2);
+;  const codeFromCurrency = fromCurrency.split(" ")[1];
   const codeToCurrency = toCurrency.split(" ")[1];
 
 useEffect(() => {
@@ -56,7 +58,7 @@ useEffect(() => {
     {firstAmount ? (
       <Box sx={{textAlign: "left", marginTop: "1rem"}}>
         <Typography>{firstAmount} {fromCurrency} =</Typography>
-        <Typography variant='h5' sx={{marginTop: "5px", fontWeight: "bold"}}>{Math.round(resultCurrency*firstAmount)} {toCurrency}</Typography>
+        <Typography variant='h5' sx={{marginTop: "5px", fontWeight: "bold"}}>{roundedResultCurrency} {toCurrency}</Typography>
       </Box>
     ) : ""}
     </Container>
