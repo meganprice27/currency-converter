@@ -1,5 +1,6 @@
-import { Container, Typography, Grid } from '@mui/material';
-import { useContext } from 'react';
+import { Box, Container, Typography, Grid } from '@mui/material';
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import InputAmount from './components/InputAmount';
 import SelectCountry from './components/SelectCountry'
 import SwitchCurrency from './components/SwitchCurrency';
@@ -11,7 +12,25 @@ function App() {
     setFromCurrency,
     toCurrency,
     setToCurrency,
+    firstAmount
   } = useContext(CurrencyContext);
+  const [resultCurrency, setResultCurrency] = useState(0);
+  const codeFromCurrency = fromCurrency.split(" ")[1];
+  const codeToCurrency = toCurrency.split(" ")[1];
+
+useEffect(() => {
+  if(firstAmount) {
+    axios("https://api.freecurrencyapi.com/v1/latest", {
+      params: {
+        apikey: "fca_live_k6ieFzlMDnqWULDQs7WeUz9CceRWA9i2GsVwGXta",
+        base_currency: codeFromCurrency,
+        currencies: codeToCurrency
+      }
+    })
+    .then(response => setResultCurrency(response.data.data[codeToCurrency]))
+    .catch(error => console.log(error))
+  }
+}, [firstAmount, fromCurrency, toCurrency])
 
   const boxStyles = {
     background: "#fdfdfd",
@@ -34,6 +53,12 @@ function App() {
       <SwitchCurrency />
       <SelectCountry value={toCurrency} setValue={setToCurrency} label="To"/>
     </Grid>
+    {firstAmount ? (
+      <Box sx={{textAlign: "left", marginTop: "1rem"}}>
+        <Typography>{firstAmount} {fromCurrency} =</Typography>
+        <Typography variant='h5' sx={{marginTop: "5px", fontWeight: "bold"}}>{Math.round(resultCurrency*firstAmount)} {toCurrency}</Typography>
+      </Box>
+    ) : ""}
     </Container>
   )
 }
